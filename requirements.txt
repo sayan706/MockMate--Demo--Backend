@@ -3,3 +3,5 @@ flask-socketio
 flask-cors
 openai
 python-dotenv
+gunicorn
+eventlet
