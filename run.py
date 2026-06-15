@@ -1,6 +1,3 @@
-import gevent.monkey
-gevent.monkey.patch_all()
-
 from app import create_app, socketio
 
 flask_app = create_app()

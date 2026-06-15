@@ -3,3 +3,9 @@ flask-socketio
 flask-cors
 openai
 python-dotenv
+PyPDF2
+python-docx
+google-genai
+Pillow
+gunicorn
+eventlet
