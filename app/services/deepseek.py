@@ -40,9 +40,9 @@ def generate_with_retry(messages, retries=3):
                     if msg["role"] == "system":
                         system_instruction = msg["content"]
                     elif msg["role"] == "user":
-                        gemini_contents.append(types.Content(role="user", parts=[types.Part.from_text(msg["content"])]))
+                        gemini_contents.append(types.Content(role="user", parts=[types.Part.from_text(text=msg["content"])]))
                     elif msg["role"] == "assistant":
-                        gemini_contents.append(types.Content(role="model", parts=[types.Part.from_text(msg["content"])]))
+                        gemini_contents.append(types.Content(role="model", parts=[types.Part.from_text(text=msg["content"])]))
                         
                 config = types.GenerateContentConfig(
                     system_instruction=system_instruction,
