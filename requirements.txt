@@ -8,4 +8,5 @@ python-docx
 google-genai
 Pillow
 gunicorn
-eventlet
+gevent
+gevent-websocket
