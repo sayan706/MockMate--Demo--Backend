@@ -22,11 +22,8 @@ class Config:
     FRAME_ANALYSIS_MODE = "batch"  # "batch" = analyze all frames at end of interview
     MAX_FRAMES_STORED = 20  # Cap frames to avoid memory issues
 
-    # ElevenLabs TTS settings
-    ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY")
-    ELEVENLABS_MALE_VOICE_ID = "cjVigY5qzO86Huf0OWal"    # Eric — Smooth, Trustworthy
-    ELEVENLABS_FEMALE_VOICE_ID = "XrExE9yKIg1WjnnlVkGX"  # Matilda — Knowledgable, Professional
-    ELEVENLABS_MODEL_ID = "eleven_flash_v2_5"              # Fast, low-latency model
+    # Smallest.ai TTS settings
+    SMALLEST_API_KEY = os.getenv("SMALLEST_API_KEY")
 
     if not DEEPSEEK_API_KEY:
         raise Exception("Please set DEEPSEEK_API_KEY in your .env file.")
@@ -34,5 +31,5 @@ class Config:
     if not GEMINI_API_KEY:
         print("WARNING: GEMINI_API_KEY not set. Video behavioral analysis will be disabled.")
 
-    if not ELEVENLABS_API_KEY:
-        print("WARNING: ELEVENLABS_API_KEY not set. TTS will fall back to browser speech synthesis.")
+    if not SMALLEST_API_KEY:
+        print("WARNING: SMALLEST_API_KEY not set. TTS will fall back to browser speech synthesis.")
