@@ -165,11 +165,11 @@ def generate_report(sid):
         "content": """
 INTERVIEW_FINISHED
 
-Generate detailed evaluation report.
-
-Include all scoring criteria and
-provide a comprehensive assessment
-with improvement plan and final remarks.
+Generate a detailed evaluation report with the following EXACT sections:
+1. **Performance Summary**: A brief overview of the candidate's performance.
+2. **Preparation Plan**: A clear, actionable step-by-step plan for the candidate to improve their weak areas.
+3. **Scoring Breakdown**: Detailed scoring criteria and comprehensive assessment.
+4. **Final Remarks**: A short closing encouraging sentence.
 """
     })
 
