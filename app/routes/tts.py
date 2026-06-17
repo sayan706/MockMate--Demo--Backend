@@ -31,7 +31,7 @@ def text_to_speech():
     if voice_gender == 'female':
         speaker = "divya"
     else:
-        speaker = "sagar"
+        speaker = "ryan"
 
     # Truncate very long text to avoid huge TTS costs (max ~500 chars)
     if len(text) > 500:
