@@ -2,7 +2,7 @@ from flask import request
 from flask_socketio import emit
 from app import socketio, sessions
 from app.config import Config
-from app.services.deepseek import generate_with_retry
+from app.services.deepseek import generate_with_retry, check_answer_relevance
 from app.services.utils import load_interviews, strip_markdown
 from app.services.cv_parser import build_cv_context
 from app.services.gemini_vision import analyze_frames_batch
@@ -95,6 +95,21 @@ def handle_answer(data):
     if answer.lower() in ("quit", "exit", "stop"):
         session['messages'].append({"role": "user", "content": answer})
         generate_report(request.sid)
+        return
+
+    # Check if the answer is relevant
+    is_relevant = check_answer_relevance(session['messages'], answer)
+
+    if not is_relevant:
+        warning_msg = "Please stay on topic and answer the interview question."
+        session['messages'].append({"role": "user", "content": answer})
+        session['messages'].append({"role": "assistant", "content": warning_msg})
+        emit('question', {
+            'question_number': session['question_count'],
+            'text': warning_msg,
+            'clean_text': warning_msg,
+            'is_finished': False
+        })
         return
 
     # Append user's answer

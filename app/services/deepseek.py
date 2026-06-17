@@ -59,3 +59,18 @@ def generate_with_retry(messages, retries=3):
             except Exception as gemini_err:
                 print(f"Gemini fallback also failed: {gemini_err}")
                 raise Exception("Both DeepSeek and Gemini APIs failed to respond.") from gemini_err
+
+def check_answer_relevance(messages, answer):
+    last_question = ""
+    for msg in reversed(messages):
+        if msg["role"] == "assistant":
+            last_question = msg["content"]
+            break
+
+    prompt = [
+        {"role": "system", "content": "You are an AI assistant evaluating an interview. Determine if the user's answer is relevant to the interview and the previous question. If the user asks an irrelevant question (e.g., 'what is the weather') or gives a completely off-topic response, answer with 'IRRELEVANT'. If the user is answering the question, asking for clarification about the interview, or engaging in normal interview dialogue, answer with 'RELEVANT'. Only respond with the exact word RELEVANT or IRRELEVANT."},
+        {"role": "user", "content": f"Previous Question: {last_question}\n\nUser's input: {answer}"}
+    ]
+    
+    response = generate_with_retry(prompt, retries=2)
+    return "IRRELEVANT" not in response.upper()
